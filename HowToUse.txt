@@ -1,0 +1,6 @@
+1.)	Add Task: Allow users to add new tasks with a brief description, assigned number and current status.
+2.)	List Tasks: Display all existing tasks with their description, ID and status denoted by color (Green/Red).
+3.)	Mark Task: Enable users to mark a specific task as done by its task number.
+4.)	Delete Task: Permit deletion of a task by its task number.
+5.)	Help/Usage: Provide a help menu that outlines how to use each command.
+6.) Exits the program
