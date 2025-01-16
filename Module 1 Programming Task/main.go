@@ -8,7 +8,6 @@ import (
 
 func main(){
 
-
 	var(
 		choice int 			// Store user input
 		description string // Store task description from user input
@@ -22,9 +21,17 @@ func main(){
 		Status string // Pending/Done
 	}
 
+	// Define colors
+	const (
+		Reset = "\033[0m"
+		Red   = "\033[31m"
+		Green = "\033[32m"
+	)
+
 	// Declaring new array of type task
 	assignTask []task
 
+	// Print welcome message
 	fmt.Println("Welcome to Task Manager")
 
 	for{
@@ -36,7 +43,7 @@ func main(){
 		fmt.Println("5.) Help/Usage")
 		fmt.Println("6.) Exit")
 
-		fmt.Scanln(&choice)
+		fmt.Scanln(&choice) // 
 
 		switch choice{
 			case 1: //Add Task
@@ -61,7 +68,15 @@ func main(){
 			
 			case 2: //List Task
 				fmt.Println("You selected List task, here are all of your tasks")
-				viewTask()
+			color:=Reset
+			for i, task := range assignTask { // Iterate over the tasks
+				if task.Status == "Pending" { // If the task is pending
+					color = Red // Set the color to red
+				} else if task.Status == "Done" { // If the task is done
+					color = Green // Set the color to green
+				}
+				fmt.Println("%s%d.    %s%s   	%s%s\n", color, i+1, Reset, task.Status, Reset, task.Description) // Print the task
+			}
 				UIpause()
 
 			case 3: //Mark Task
@@ -107,6 +122,7 @@ func main(){
 			break // Break out of continuous for loop
 		}
 	}
+	return 0
 }
 
 func UIpause(){
@@ -123,8 +139,3 @@ func viewTask(){
 	list, _ := os.ReadFile("Task List.txt")
 	fmt.Println(string(list))
 }
-// Add Task: Allow users to add new tasks with a brief description.
-// List Tasks: Display all existing tasks with their status (Pending/Done).
-// Mark Task as Done: Enable users to mark a specific task as done by its task number.
-// Delete Task: Permit deletion of a task by its task number.
-// Help/Usage: Provide a help menu that outlines how to use each command.
