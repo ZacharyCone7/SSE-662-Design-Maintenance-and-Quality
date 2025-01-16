@@ -15,7 +15,7 @@ func main(){
 	)
 
 	// Define struct for holding task fields
-	type  task struct{
+	type task struct{
 		ID int
 		Description string 
 		Status string // Pending/Done
@@ -68,15 +68,15 @@ func main(){
 			
 			case 2: //List Task
 				fmt.Println("You selected List task, here are all of your tasks")
-			color:=Reset
-			for i, task := range assignTask { // Iterate over the tasks
-				if task.Status == "Pending" { // If the task is pending
-					color = Red // Set the color to red
-				} else if task.Status == "Done" { // If the task is done
-					color = Green // Set the color to green
+				color:=Reset
+				for i, task := range assignTask { // Iterate over the tasks
+					if task.Status == "Pending" { // If the task is pending
+						color = Red // Set the color to red
+					} else if task.Status == "Done" { // If the task is done
+						color = Green // Set the color to green
+					}
+					fmt.Println("%s%d.    %s%s   	%s%s\n", color, i+1, Reset, task.Status, Reset, task.Description) // Print the task
 				}
-				fmt.Println("%s%d.    %s%s   	%s%s\n", color, i+1, Reset, task.Status, Reset, task.Description) // Print the task
-			}
 				UIpause()
 
 			case 3: //Mark Task
@@ -94,6 +94,13 @@ func main(){
 				viewTask()
 				fmt.Scan(&choice)
 
+				// Check if ID is valid
+				if choice < 1 || choice > len(assignTask) {
+					fmt.Println("Invalid task ID.")
+					UIpause()
+					break // Exit the case block
+				}
+
 				j:=0 // Used to update task IDs after deletion
 				for(_, element:=range assignTask){
 					if(element.ID != choice){
@@ -106,7 +113,7 @@ func main(){
 				// Print confirmation messsage
 				fmt.Println("Task \"", assignTask[choice].ID, "\" is deleted")
 				
-				// Update assignTask slice
+				// Update assignTask slice with tempTask data
 				assignTask = []task{}
 				copy(tempTask, assignTask)
 
