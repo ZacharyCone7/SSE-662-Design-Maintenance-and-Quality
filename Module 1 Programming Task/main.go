@@ -1,17 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
+	"fmt"
 	"os"
-	)
-
-func main(){
-
-	var(
-		choice int 			// Store user input
-		description string // Store task description from user input
-		flag bool 		  // Exit flag
+	"functions"
 	)
 
 	// Define struct for holding task fields
@@ -28,8 +21,14 @@ func main(){
 		Green = "\033[32m"
 	)
 
+func main() {
+	var (
+		choice      int    // Store user input
+		description string // Store task description from user input
+		flag        bool   = true
+	)
 	// Declaring new array of type task
-	assignTask []task
+	var assignTask []task
 
 	// Print welcome message
 	fmt.Println("Welcome to Task Manager")
@@ -47,8 +46,10 @@ func main(){
 
 		switch choice{
 			case 1: //Add Task
+			reader := bufio.NewReader(os.Stdin)
 				fmt.Println("You selected Add task, what task do you want added?")
-				fmt.Scan(&description)
+			input, _ := reader.ReadString('\n')
+			description = input[:len(input)-1]
 
 				// Creating a new task
 				newTask := task{
@@ -56,93 +57,75 @@ func main(){
 					Description: 	description, // Add description
 					Status: 		"Pending", // Set status
 				}
-
-				//Creating and Writing to a file to store tasks
-				f, _ := os.Create("Task List.txt")
-				defer f.Close()
-				newTask, _ = f.WriteString(newTask)
+			// Add task to array
+			assignTask = append(assignTask, newTask)
 
 				// Print confirmation message
 				fmt.Println("Task \"", newTask.description, "\" added")
-				UIpause() // Wait for user input before continuing
+				functions.UIpause() // Wait for user input before continuing
 			
 			case 2: //List Task
 				fmt.Println("You selected List task, here are all of your tasks")
-				color:=Reset
-				for i, task := range assignTask { // Iterate over the tasks
-					if task.Status == "Pending" { // If the task is pending
-						color = Red // Set the color to red
-					} else if task.Status == "Done" { // If the task is done
-						color = Green // Set the color to green
-					}
-					fmt.Println("%s%d.    %s%s   	%s%s\n", color, i+1, Reset, task.Status, Reset, task.Description) // Print the task
+			if assignTask == nil {
+				fmt.Println("No tasks found")
+			} else {
+				functions.ViewTask(assignTask)
 				}
-				UIpause()
+				functions.UIpause()
 
 			case 3: //Mark Task
 				fmt.Println("You selected Mark task, which task would you like to change the status of?")
-				viewTask()
+			functions.ViewTask(assignTask)
 				fmt.Scan(&choice)
 
+			if choice < 1 || choice > len(assignTask) {
+				fmt.Println("Invalid task ID.")
+				return
+			}
 				// Change status of selected task
 				assignTask[choice-1].Status = "Done"
-				fmt.Println("Task \"", assignTask[choice].ID, "\" marked as completed")
-				UIpause()
+			fmt.Println("Task \"", assignTask[choice-1].ID, "\" marked as completed")
+				functions.UIpause()
 
 			case 4: //Delete Task
+			if len(assignTask) == 0 {
+				fmt.Println("No tasks found")
+				break
+			}
 				fmt.Println("Which task would you like to delete?")
-				viewTask()
+			functions.ViewTask(assignTask)
 				fmt.Scan(&choice)
 
 				// Check if ID is valid
 				if choice < 1 || choice > len(assignTask) {
 					fmt.Println("Invalid task ID.")
-					UIpause()
+					functions.UIpause()
 					break // Exit the case block
 				}
 
-				j:=0 // Used to update task IDs after deletion
-				for(_, element:=range assignTask){
-					if(element.ID != choice){
-						append(element,tempTask[]) // Add task to new slice
-						tempTask[j].ID = j+1 // Update task IDs in new slice
-						j++ // Increment j
+			assignTask = append(assignTask[:choice-1], assignTask[choice:]...) // Remove task from array
+			for i := range assignTask {
+				assignTask[i].ID = i + 1
 					}
-				}
 				
 				// Print confirmation messsage
-				fmt.Println("Task \"", assignTask[choice].ID, "\" is deleted")
+			fmt.Println("Task \"", choice, "\" is deleted")
 				
-				// Update assignTask slice with tempTask data
-				assignTask = []task{}
-				copy(tempTask, assignTask)
 
 			case 6: //Exit
 				flag = false
 
 			default: //Help/Usage
-				list, _ := os.ReadFile("HowToUse.txt")
+			list, err := os.ReadFile("HowToUse.txt")
+			if err != nil {
+				fmt.Println("Help file not found")
+			} else {
 				fmt.Println(string(list))
+			}
 		}
 
-		if(flag == false){
+		if !flag {
 			break // Break out of continuous for loop
 		}
 	}
-	return 0
-}
-
-func UIpause(){
-	reader := bufio.NewReader(os.Stdin)
-	//Reading input from user before next task prompt
-	input, _ := reader.ReadString('\n') 
-	if input == "\n" {
-		continue
-	}
-}
-
-func viewTask(){
-	//Reads from written file and displays contents
-	list, _ := os.ReadFile("Task List.txt")
-	fmt.Println(string(list))
 }
