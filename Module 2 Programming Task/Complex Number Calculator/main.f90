@@ -3,17 +3,19 @@ program complex_calculator
     use utils_module
     implicit none
 
-    type(complex) :: a, b, c
-    integer :: y, z
-
-do while(.false.)
+    type(complex_number) :: a, b, c
+    integer :: y, z, x
+    logical :: exit = .false.
+do while(.not. exit)
     call main_menu()
     read(*,*) y
 
-    if (0 > y <= 5) then
-    call format_menu()
+    if (y <=6 .AND. y >= 1) then
+    
+    if (y .NE. 6) then
+    call format_result()
     read(*,*) z 
-
+    endif
     select case(y)
         case(1)
             call get_input(a, b, x, y, z)
@@ -33,7 +35,7 @@ do while(.false.)
             call print_format_result(c, z)
         case(5)
             call get_input(a, b, x, y, z)
-            c = power(a, b)
+            c = power(a, x)
             call print_format_result(c, z)
         case(6)
             exit = .true.
@@ -41,6 +43,6 @@ do while(.false.)
         case default
             print *, "Invalid choice. Please try again."
     end select
-    end if 
+end if
 end do 
 end program complex_calculator
