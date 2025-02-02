@@ -5,6 +5,7 @@ module utils_module
     logical :: valid_input
 
     contains
+        ! Prints the Main Menu
         subroutine main_menu()
             print *, "Complex Number Calculator"
             print *, "--------------------------"
@@ -13,10 +14,12 @@ module utils_module
             print *, "3. Multiply"
             print *, "4. Divide"
             print *, "5. Power"
-            print *, "6. Exit"
+            print *, "6. Conjugate"
+            print *, "7. Exit"
             print *, "Enter your calculation choice: "
         end subroutine main_menu
 
+        ! Prints the Format Menu
         subroutine format_result()
             print *, "How do you want to format the result?"
             print *, "-------------------------------------"
@@ -26,6 +29,7 @@ module utils_module
             print *, "Enter your choice: "
         end subroutine format_result
 
+        ! Gets the user input in the desired complex number format
         subroutine get_input(a, b, x, y, z)
             type(complex_number), intent(out) :: a, b
             integer, intent(in) :: y, z
@@ -71,6 +75,7 @@ module utils_module
             end select
         end subroutine get_input
 
+        
         subroutine print_format_result(c, z)
             type(complex_number), intent(in) :: c
             integer, intent(in) :: z
