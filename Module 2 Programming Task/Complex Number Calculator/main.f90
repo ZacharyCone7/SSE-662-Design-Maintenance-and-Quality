@@ -7,7 +7,8 @@ program complex_calculator
    ! Defined variables
     type(complex_number) :: a, b, c
     integer :: y, z, x
-    logical :: exit = .false.
+    logical :: exit = .false., valid_input
+    character(len=25) :: input
 
     !Calls the main menu for calculator
 do while(.not. exit)
