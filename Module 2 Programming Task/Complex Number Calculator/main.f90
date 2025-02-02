@@ -44,16 +44,16 @@ do while(.not. exit)
             call print_format_result(c, z)
         case(6) !Calls the conjugate function
             if (z==1) then 
-                print *, "Enter the complex number that is in the format-(Real, Imaginary): "
+                print *, "Enter the complex number that is in the format (Real, Imaginary): "
                 read(*,"(F8.1, F8.1)") a%real, a%imag
             elseif (z==2) then
-                print *, "Enter the complex number that is in the format-Real + Imaginary*i: "
+                print *, "Enter the complex number that is in the format Real + Imaginary*i: "
                 read(*, '(A)') input
                 do while (.not.(parse_input(input, a)))
                     read(*, '(A)') input
                 end do
             elseif (z==3) then
-                print *, "Enter the complex number that is in the format-Real: "
+                print *, "Enter the complex number that is in the format Real: "
                 read(*,*) a%real
                 a%imag = 0.0
             endif

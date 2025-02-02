@@ -42,6 +42,7 @@ module functions_module
                 valid_input = .false.
             endif
         end function parse_input
+        
         ! Complex number operations
         function add(a, b) result(c)! Add function
             type(complex_number), intent(in) :: a, b
