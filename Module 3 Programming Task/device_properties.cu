@@ -68,5 +68,8 @@ void displayCudaDeviceInfo(){
 int main(){
 	// Call the Device Info function to display CUDA information
 	displayCudaDeviceInfo();
+
+	system("pause");
+	
 	return 0;
 }
