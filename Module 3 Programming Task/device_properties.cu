@@ -19,7 +19,7 @@ void printDeviceProperties(const cudaDeviceProp& deviceProp, int deviceId) {
 		// Print the properties of the current CUDA device
 		cout << "Here are your Cuda device specifications" << endl;
 		cout << "-----------------------------------------" << endl;
-		cout << "Device " << device + 1 << ": " << deviceProp.name << endl;
+		cout << "Device " << deviceId + 1 << ": " << deviceProp.name << endl;
 		cout << " Compute Capability: " << deviceProp.major << ", " << deviceProp.minor << endl;
 		cout << " Multiprocessors: " << deviceProp.multiProcessorCount << endl;
 		cout << " Max Threads per Multiprocessor: " << deviceProp.maxThreadsPerMultiProcessor << endl;
@@ -30,7 +30,7 @@ void printDeviceProperties(const cudaDeviceProp& deviceProp, int deviceId) {
 		cout << " Clock Rate: " << deviceProp.clockRate << " kHz" << endl;
 		cout << " Memory Clock Rate: " << deviceProp.memoryClockRate << " MHz" << endl;
 		cout << " Memory Bus Width: " << deviceProp.memoryBusWidth << " bits" << endl;
-	}
+}
 
 // Function to display information about CUDA devices
 void displayCudaDeviceInfo(){
@@ -44,7 +44,7 @@ void displayCudaDeviceInfo(){
 	// Step 2: If no CUDA devices are available, print an error message and exit
 	if (deviceCount == 0) {
 		cout << "No CUDA devices found." << endl;
-		return 0;
+		exit(EXIT_FAILURE);
 	}
 
 	// Step 3: Print the total number of CUDA devices
