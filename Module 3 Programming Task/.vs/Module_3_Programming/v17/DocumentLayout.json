@@ -1,10 +1,17 @@
 {
   "Version": 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "WorkspaceRootPath": "C:\\Users\\Zachary.Cone.SERN\\Desktop\\School Stuff\\SSE 662-Design, Maintenance and Quality\\Module 3 Programming Task\\",
   "Documents": [
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Zachary.Cone.SERN\\Desktop\\School Stuff\\SSE 662-Design, Maintenance and Quality\\Module 3 Programming Task\\device_properties.cu||{8B382828-6202-11D1-8870-0000F87579D2}",
+=======
+  "WorkspaceRootPath": "C:\\Users\\zscon\\Desktop\\Mercer Masters\\SSE 662\\Module 3 Programming Task\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\zscon\\Desktop\\Mercer Masters\\SSE 662\\Module 3 Programming Task\\device_properties.cu||{8B382828-6202-11D1-8870-0000F87579D2}",
+>>>>>>> a450a3cfccae78e434523511692340ccc8f428b6
 =======
   "WorkspaceRootPath": "C:\\Users\\zscon\\Desktop\\Mercer Masters\\SSE 662\\Module 3 Programming Task\\",
   "Documents": [
@@ -22,7 +29,11 @@
         {
           "DockedWidth": 200,
 <<<<<<< HEAD
+<<<<<<< HEAD
           "SelectedChildIndex": 4,
+=======
+          "SelectedChildIndex": 5,
+>>>>>>> a450a3cfccae78e434523511692340ccc8f428b6
 =======
           "SelectedChildIndex": 5,
 >>>>>>> a450a3cfccae78e434523511692340ccc8f428b6
@@ -34,14 +45,25 @@
             {
               "$type": "Bookmark",
 <<<<<<< HEAD
+<<<<<<< HEAD
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
 =======
+=======
+>>>>>>> a450a3cfccae78e434523511692340ccc8f428b6
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
 >>>>>>> a450a3cfccae78e434523511692340ccc8f428b6
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -60,11 +82,19 @@
               "DocumentIndex": 0,
               "Title": "device_properties.cu",
 <<<<<<< HEAD
+<<<<<<< HEAD
               "DocumentMoniker": "C:\\Users\\Zachary.Cone.SERN\\Desktop\\School Stuff\\SSE 662-Design, Maintenance and Quality\\Module 3 Programming Task\\device_properties.cu",
               "RelativeDocumentMoniker": "device_properties.cu",
               "ToolTip": "C:\\Users\\Zachary.Cone.SERN\\Desktop\\School Stuff\\SSE 662-Design, Maintenance and Quality\\Module 3 Programming Task\\device_properties.cu",
               "RelativeToolTip": "device_properties.cu",
               "ViewState": "AgIAADMAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+=======
+              "DocumentMoniker": "C:\\Users\\zscon\\Desktop\\Mercer Masters\\SSE 662\\Module 3 Programming Task\\device_properties.cu",
+              "RelativeDocumentMoniker": "device_properties.cu",
+              "ToolTip": "C:\\Users\\zscon\\Desktop\\Mercer Masters\\SSE 662\\Module 3 Programming Task\\device_properties.cu",
+              "RelativeToolTip": "device_properties.cu",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+>>>>>>> a450a3cfccae78e434523511692340ccc8f428b6
 =======
               "DocumentMoniker": "C:\\Users\\zscon\\Desktop\\Mercer Masters\\SSE 662\\Module 3 Programming Task\\device_properties.cu",
               "RelativeDocumentMoniker": "device_properties.cu",
