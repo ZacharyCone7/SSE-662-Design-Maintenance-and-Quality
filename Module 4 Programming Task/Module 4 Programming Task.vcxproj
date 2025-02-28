@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Module 4 Programming Task.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="main.cu" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
