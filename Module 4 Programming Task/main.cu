@@ -11,6 +11,8 @@ using namespace std;
 #define SHMEM_SIZE 256 * 4  // Shared memory size for the reduction kernel
 #define SIZE 256            // Size of each block (number of threads per block)
 
+__global__ void reduceKernel(int* inputArray, int* outputArray, int arraySize);
+
 // Function to check for CUDA errors and print error messages
 void checkCudaError(cudaError_t err, const char* msg) {
     if (err != cudaSuccess) {
@@ -39,41 +41,6 @@ vector<int> generateRandomArray(uint64_t s[2], size_t size) {
         random_array[i] = xorshift128plus(s); // Generate random number for each element
     }
     return random_array;
-}
-
-// Define the kernel for parallel reduction
-__global__ void reduceKernel(int* inputArray, int* outputArray, int arraySize) {
-    extern __shared__ int shared_sum[];  // Shared memory to hold partial sums
-
-    // Calculate thread index
-    int tid = blockIdx.x * blockDim.x + threadIdx.x; // Global thread index
-    int stride = blockDim.x * gridDim.x; // Stride: the step size by which a thread advances through the data
-
-    // Initialize partial sum for each thread
-    int partial_sum = 0;
-    // Perform reduction across threads
-    for (int i = tid; i < arraySize; i += stride) {
-        partial_sum += inputArray[i];  // Accumulate data into partial sum
-    }
-
-    // Store partial sum in shared memory
-    shared_sum[threadIdx.x] = partial_sum;
-    // Synchronize threads within the block before proceeding
-    __syncthreads();
-
-    // Perform block-level reduction: combine the partial sums in shared memory
-    for (int i = blockDim.x / 2; i > 0; i /= 2) {
-        if (threadIdx.x < i) {
-            shared_sum[threadIdx.x] += shared_sum[threadIdx.x + i]; // Combine results from threads
-        }
-        // Synchronize threads again before the next reduction step
-        __syncthreads();
-    }
-
-    // Write the final result from the block (first thread in the block) to global memory
-    if (threadIdx.x == 0) {
-        outputArray[blockIdx.x] = shared_sum[0];
-    }
 }
 
 // Initialize a vector with a specific value (for debugging or testing)
@@ -167,7 +134,7 @@ int main() {
 
     //-------------- Test Case 2: Fixed Grid Size, Varying Block Size
     int numBlocks = (array_size + 1024 - 1) / 1024;
-    for (int blockSize = 128; blockSize <= 1024; blockSize *= 2) {
+    for (blockSize = 128; blockSize <= 1024; blockSize *= 2) {
         cudaEvent_t start, stop;
         cudaEventCreate(&start);
         cudaEventCreate(&stop);
@@ -179,7 +146,7 @@ int main() {
         cudaEventSynchronize(stop);
         cudaEventElapsedTime(&elapsedTime, start, stop);
 
-        cout << "Grid Size: " << numBlocks << ", Block Size: 256, Execution Time: " << elapsedTime << " ms" << endl;
+        cout << "Grid Size: " << numBlocks << ", Block Size: " << blockSize << ", Execution Time: " << elapsedTime << " ms" << endl;
 
         cudaEventDestroy(start);
         cudaEventDestroy(stop);
